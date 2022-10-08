@@ -1,6 +1,6 @@
 package com.siuuu.mercatec.ui.home
 
-class Producto (user:String, name:String, description:String, price: Double, rating: Double, image:Int) {
+class Product (user:String, name:String, description:String, price: Double, rating: Double, image:Int) {
 
     var user = ""
     var name = ""

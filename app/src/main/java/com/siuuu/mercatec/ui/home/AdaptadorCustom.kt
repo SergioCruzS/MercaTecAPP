@@ -1,21 +1,19 @@
 package com.siuuu.mercatec.ui.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.siuuu.mercatec.R
 
 
-class AdaptadorCustom(items:ArrayList<Producto>, var listener: ClickListener): RecyclerView.Adapter<AdaptadorCustom.ViewHolder>() {
+class AdaptadorCustom(items:ArrayList<Product>, var listener: ClickListener): RecyclerView.Adapter<AdaptadorCustom.ViewHolder>() {
 
-    var items: ArrayList<Producto>? = null
+    var items: ArrayList<Product>? = null
     init {
         this.items = items
     }

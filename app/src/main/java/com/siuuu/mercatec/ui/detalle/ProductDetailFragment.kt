@@ -10,12 +10,13 @@ import androidx.fragment.app.Fragment
 import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.FragmentProductDetailBinding
 import com.siuuu.mercatec.ui.home.HomeFragment
+import com.siuuu.mercatec.ui.home.Product
 
-class ProductDetailFragment(nombre:String) : Fragment(){
+class ProductDetailFragment(product:Product) : Fragment(){
 
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
-    private val nombreDetalle = nombre
+    private val product : Product = product
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,9 +25,10 @@ class ProductDetailFragment(nombre:String) : Fragment(){
 
         _binding = FragmentProductDetailBinding.inflate(inflater, container, false)
         //val root:View = binding.root
-        var buttonBack: Button? = binding.btBackHome
-        var text: TextView = binding.textView2
-        text.setText(nombreDetalle)
+        var buttonBack: Button? = binding.btProductDetailBack
+        binding.tvProductDetailName.setText(product.name)
+        binding.ivProductDetailImage.setImageResource(product.image)
+
         buttonBack?.setOnClickListener {
             println("listener")
             //Fragment Transactions
