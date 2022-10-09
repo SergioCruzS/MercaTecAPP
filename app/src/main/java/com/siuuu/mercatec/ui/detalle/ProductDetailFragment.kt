@@ -1,14 +1,15 @@
 package com.siuuu.mercatec.ui.detalle
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.FragmentProductDetailBinding
+import com.siuuu.mercatec.ui.chat.ChatActivity
 import com.siuuu.mercatec.ui.home.HomeFragment
 import com.siuuu.mercatec.ui.home.Product
 
@@ -30,13 +31,20 @@ class ProductDetailFragment(product:Product) : Fragment(){
         binding.ivProductDetailImage.setImageResource(product.image)
 
         buttonBack?.setOnClickListener {
-            println("listener")
             //Fragment Transactions
             val fragmentManager = activity?.supportFragmentManager
             // Create and commit a new transaction
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_content_main,HomeFragment())
             transaction?.commit()
+        }
+
+        var buttonContact: Button? = binding.btProductDetailContactVendor
+        buttonContact?.setOnClickListener {
+            val intent = Intent(requireContext(),ChatActivity::class.java)
+            intent.putExtra("name",product.user)
+            intent.putExtra("name",product.name)
+            requireContext()?.startActivity(intent)
         }
         return binding.root
     }

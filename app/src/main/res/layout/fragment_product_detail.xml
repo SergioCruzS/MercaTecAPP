@@ -6,40 +6,51 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_product_detail_back"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Regresar" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_product_detail_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del producto" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/iv_product_detail_image"
-        android:layout_width="match_parent"
-        android:layout_height="246dp"
-        app:srcCompat="@drawable/arduino_uno" />
+            <Button
+                android:id="@+id/bt_product_detail_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Regresar" />
 
-    <TextView
-        android:id="@+id/tv_product_detail_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Precio: $" />
+            <TextView
+                android:id="@+id/tv_product_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del producto" />
 
-    <TextView
-        android:id="@+id/tv_product_detail_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Detalles del producto" />
+            <ImageView
+                android:id="@+id/iv_product_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="246dp"
+                app:srcCompat="@drawable/arduino_uno" />
 
-    <Button
-        android:id="@+id/bt_product_detail_contact_vendor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Contactar al vendedor" />
+            <TextView
+                android:id="@+id/tv_product_detail_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precio: $" />
+
+            <TextView
+                android:id="@+id/tv_product_detail_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalles del producto" />
+
+            <Button
+                android:id="@+id/bt_product_detail_contact_vendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contactar al vendedor" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

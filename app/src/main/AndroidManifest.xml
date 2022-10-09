@@ -27,6 +27,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".ui.chat.ChatActivity"
+                  android:label=""
+                  android:theme="@style/Theme.MercaTec.NoActionBar"/>
     </application>
 
 </manifest>
