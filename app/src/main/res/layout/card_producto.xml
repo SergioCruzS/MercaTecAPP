@@ -5,61 +5,83 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="3dp"
+        app:cardUseCompatPadding="false">
 
-        <TextView
-            android:id="@+id/txv_usuario"
-            android:layout_width="222dp"
-            android:layout_height="43dp"
-            android:text="Nombre Usuario"
-            android:textSize="20sp" />
-
-        <RatingBar
-            android:id="@+id/rb_rating"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:progressTint="#FFC107" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imv_producto"
-        android:layout_width="match_parent"
-        android:layout_height="144dp"
-        app:srcCompat="@drawable/arduino_uno" />
-
-    <TextView
-        android:id="@+id/txv_titulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Título"
-        android:textSize="24sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txv_descripcion"
-            android:layout_width="265dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="El Arduino Uno es una placa de microcontrolador de código abierto basado en el microchip ATmega328P y desarrollado por Arduino..." />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txv_precio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="$400"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/txv_usuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nombre Usuario"
+                    android:textSize="20sp" />
+
+                <RatingBar
+                    android:id="@+id/rb_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:visibility="invisible"
+                    android:progressTint="#FFC107" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imv_producto"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                app:srcCompat="@drawable/arduino_uno" />
+
+            <TextView
+                android:id="@+id/txv_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txv_descripcion"
+                    android:layout_width="265dp"
+                    android:layout_height="match_parent"
+                    android:text="El Arduino Uno es una placa de microcontrolador de código abierto basado en el microchip ATmega328P y desarrollado por Arduino..." />
+
+                <TextView
+                    android:id="@+id/txv_precio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$400"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
