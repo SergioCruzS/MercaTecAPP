@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.siuuu.mercatec.databinding.FragmentPerfilBinding
 
 class PerfilFragment : Fragment() {
@@ -22,16 +20,14 @@ class PerfilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(PerfilViewModel::class.java)
 
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textPerfil
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        //val textView: TextView = binding.textPerfil
+        //galleryViewModel.text.observe(viewLifecycleOwner) {
+        //    textView.text = it
+        //}
         return root
     }
 

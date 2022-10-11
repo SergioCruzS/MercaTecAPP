@@ -12,9 +12,8 @@ import com.siuuu.mercatec.databinding.SendMessageBinding
 
 class AdaptadorCustomChat (messages:ArrayList<Message>): RecyclerView.Adapter<RecyclerView.ViewHolder?>(){
     lateinit var messages: ArrayList<Message>
-    private var type:Int = 0
-    val ITEM_SENT = 0
-    val ITEM_RECEIVE = 1
+    private val ITEM_SENT = 0
+    private val ITEM_RECEIVE = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == ITEM_SENT){
