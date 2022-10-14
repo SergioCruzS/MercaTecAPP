@@ -1,5 +1,6 @@
 package com.siuuu.mercatec.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
-import com.siuuu.mercatec.ui.detalle.ProductDetailFragment
+import com.siuuu.mercatec.ui.chat.ChatActivity
 
 class HomeFragment : Fragment() {
 
@@ -41,15 +41,9 @@ class HomeFragment : Fragment() {
         listProducts?.layoutManager = layoutManager
         listProducts?.adapter = AdaptadorCustom(productos, object:ClickListener{
             override fun onClick(vista: View, index: Int) {
-                //Fragment Transactions
-                val fragmentManager = activity?.supportFragmentManager
-
-                // Create and commit a new transaction
-                val transaction = fragmentManager?.beginTransaction()
-                transaction?.replace(R.id.nav_host_fragment_content_main,ProductDetailFragment(productos[index]))
-                transaction?.addToBackStack(null)
-                transaction?.commit()
                 Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), ChatActivity::class.java)
+                requireContext()?.startActivity(intent)
             }
         })
         return root
