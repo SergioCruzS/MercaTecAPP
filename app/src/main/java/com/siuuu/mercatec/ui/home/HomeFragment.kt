@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
 import com.siuuu.mercatec.ui.chat.ChatActivity
+import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
 
 class HomeFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class HomeFragment : Fragment() {
         listProducts?.adapter = AdaptadorCustom(productos, object:ClickListener{
             override fun onClick(vista: View, index: Int) {
                 Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
-                val intent = Intent(requireContext(), ChatActivity::class.java)
+                val intent = Intent(requireContext(), ProductDetailActivity::class.java)
                 requireContext()?.startActivity(intent)
             }
         })

@@ -20,6 +20,11 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarChat)
+
+        binding.ivBackToolbarChat.setOnClickListener(){
+            this.onBackPressed()
+        }
+
         var arrMsg = ArrayList<Message>()
         arrMsg.add(0,Message("Hola",0))
         arrMsg.add(1,Message("Me puedes dar informes",0))
@@ -38,8 +43,6 @@ class ChatActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this.applicationContext)
         listMessages?.layoutManager = layoutManager
         listMessages?.adapter = AdaptadorCustomChat(arrMsg)
-
-
 
     }
 
