@@ -1,16 +1,14 @@
 package com.siuuu.mercatec.ui.chat
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.ReceiveMessageBinding
 import com.siuuu.mercatec.databinding.SendMessageBinding
 
-class AdaptadorCustomChat (messages:ArrayList<Message>): RecyclerView.Adapter<RecyclerView.ViewHolder?>(){
+class CustomAdapterChat (messages:ArrayList<Message>): RecyclerView.Adapter<RecyclerView.ViewHolder?>(){
     lateinit var messages: ArrayList<Message>
     private val ITEM_SENT = 0
     private val ITEM_RECEIVE = 1

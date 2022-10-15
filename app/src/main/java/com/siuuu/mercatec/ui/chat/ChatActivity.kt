@@ -1,11 +1,9 @@
 package com.siuuu.mercatec.ui.chat
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.ActivityChatBinding
 
 
@@ -42,7 +40,7 @@ class ChatActivity : AppCompatActivity() {
         listMessages?.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.applicationContext)
         listMessages?.layoutManager = layoutManager
-        listMessages?.adapter = AdaptadorCustomChat(arrMsg)
+        listMessages?.adapter = CustomAdapterChat(arrMsg)
 
     }
 
