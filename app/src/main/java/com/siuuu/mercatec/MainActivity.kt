@@ -1,7 +1,9 @@
 package com.siuuu.mercatec
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
+import android.widget.ImageView
+import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,11 +13,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.siuuu.mercatec.databinding.ActivityMainBinding
+import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
+import com.siuuu.mercatec.ui.search.SearchActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,14 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val ivbar:ImageView = findViewById(R.id.iv_ic_search)
+        ivbar.setOnClickListener(){
+            Toast.makeText(this,"Buscar",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SearchActivity::class.java)
+            this.startActivity(intent)
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

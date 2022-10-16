@@ -19,22 +19,13 @@
             app:popupTheme="@style/Theme.MercaTec.PopupOverlay">
 
             <ImageView
+                android:id="@+id/iv_ic_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_search"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/black"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

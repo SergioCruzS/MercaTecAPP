@@ -35,6 +35,17 @@
             android:name=".ui.detalle.ProductDetailActivity"
             android:label=""
             android:theme="@style/Theme.MercaTec.NoActionBar" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:label=""
+            android:theme="@style/Theme.MercaTec.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

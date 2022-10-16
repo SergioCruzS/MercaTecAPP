@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
-import com.siuuu.mercatec.ui.chat.ChatActivity
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
 
 class HomeFragment : Fragment() {
@@ -47,6 +46,7 @@ class HomeFragment : Fragment() {
                 requireContext()?.startActivity(intent)
             }
         })
+
         return root
     }
 

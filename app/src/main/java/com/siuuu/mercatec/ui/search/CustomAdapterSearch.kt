@@ -11,7 +11,7 @@ import com.siuuu.mercatec.ui.home.ClickListener
 import com.siuuu.mercatec.ui.home.Product
 
 
-public class CustomAdapterSearch(items:ArrayList<Product>, var listener:ClickListener): RecyclerView.Adapter<CustomAdapterSearch.ViewHolder>() {
+class CustomAdapterSearch(items:ArrayList<Product>, var listener:ClickListener): RecyclerView.Adapter<CustomAdapterSearch.ViewHolder>() {
     var items: ArrayList<Product>? = null
 
     init {
