@@ -52,7 +52,7 @@ class SearchActivity : AppCompatActivity(){
                     listProducts?.adapter = CustomAdapterSearch(productos,object:ClickListener{
                         override fun onClick(vista: View, index: Int) {
                             val intent = Intent(this@SearchActivity, ProductDetailActivity::class.java)
-                            this@SearchActivity?.startActivity(intent)
+                            this@SearchActivity.startActivity(intent)
                         }
                     })
                 }else{
@@ -68,19 +68,9 @@ class SearchActivity : AppCompatActivity(){
 
         })
 
-
-
-
         binding.ivBackToolbarSearch.setOnClickListener(){
             this.onBackPressed()
         }
-
-        if (Intent.ACTION_SEARCH == intent.action) {
-            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
-
-            }
-        }
-
     }
 
 

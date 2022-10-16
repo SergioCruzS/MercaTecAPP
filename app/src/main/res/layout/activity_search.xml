@@ -48,13 +48,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:queryHint="Search"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                android:iconifiedByDefault="false"/>
         </androidx.cardview.widget.CardView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#4B808080"
+            android:background="@color/white"
             android:scrollbarStyle="insideInset"/>
     </LinearLayout>
 
