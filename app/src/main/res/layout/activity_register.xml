@@ -140,4 +140,13 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="#03A9F4"/>
 
+    <TextView
+        android:id="@+id/tv_login_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFF"
+        android:gravity="center"
+        android:text="¿Ya está registrado?. Iniciar Sesión"/>
+
 </LinearLayout>

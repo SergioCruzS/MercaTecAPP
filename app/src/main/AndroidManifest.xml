@@ -54,14 +54,16 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.MercaTec.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.MercaTec.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

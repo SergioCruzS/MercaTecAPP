@@ -18,6 +18,7 @@
         app:cardCornerRadius="30dp">
 
         <EditText
+            android:id="@+id/tv_email_login"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <EditText
+                android:id="@+id/tv_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@android:color/transparent"
@@ -64,10 +66,20 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/bt_iniciar_sesion_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
         android:layout_marginTop="40dp"
         android:backgroundTint="#03A9F4"/>
+
+    <TextView
+        android:id="@+id/tv_registrar_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFF"
+        android:gravity="center"
+        android:text="¿No esta registrado? Registrate ahora"/>
 
 </LinearLayout>
