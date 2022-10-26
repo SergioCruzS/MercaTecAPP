@@ -9,6 +9,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.MainActivity
+import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.ActivityRegisterBinding
 import com.siuuu.mercatec.ui.values.Strings
 import org.json.JSONObject
@@ -47,6 +48,37 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvLoginRegister.setOnClickListener(){
             val intent = Intent(this,LoginActivity::class.java)
             this?.startActivity(intent)
+            finish()
+        }
+
+        var visibilityPassword = false;
+        binding.ivVisibilityPasswordRegister.setOnClickListener(){
+            //145 = texto visible
+            //129 = texto invisible
+            if (visibilityPassword){
+                binding.ivVisibilityPasswordRegister.setImageResource(R.drawable.ic_visibility)
+                binding.tvPasswordRegister.inputType = 129
+                visibilityPassword = false
+            }else{
+                binding.ivVisibilityPasswordRegister.setImageResource(R.drawable.ic_visibility_off)
+                binding.tvPasswordRegister.inputType = 145
+                visibilityPassword = true
+            }
+        }
+
+        var visibilityConfirmPassword = false;
+        binding.ivVisibilityConfirmPasswordRegister.setOnClickListener(){
+            //145 = texto visible
+            //129 = texto invisible
+            if (visibilityConfirmPassword){
+                binding.ivVisibilityConfirmPasswordRegister.setImageResource(R.drawable.ic_visibility)
+                binding.tvConfirmPasswordRegister.inputType = 129
+                visibilityConfirmPassword = false
+            }else{
+                binding.ivVisibilityConfirmPasswordRegister.setImageResource(R.drawable.ic_visibility_off)
+                binding.tvConfirmPasswordRegister.inputType = 145
+                visibilityConfirmPassword = true
+            }
         }
     }
 }

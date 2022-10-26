@@ -55,6 +55,7 @@
                 android:inputType="textPassword"/>
 
             <ImageView
+                android:id="@+id/iv_visibility_password_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_visibility"
