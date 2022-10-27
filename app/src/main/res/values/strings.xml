@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">MercaTec</string>
+    <string name="menu_ad">Mis anuncios</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="textview">TextView</string>

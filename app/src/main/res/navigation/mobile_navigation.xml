@@ -10,6 +10,11 @@
         android:name="com.siuuu.mercatec.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_ads"
+        android:name="com.siuuu.mercatec.ui.ads.AdsFragment"
+        android:label="@string/menu_ad"
+        tools:layout="@layout/fragment_ads" />
 
     <fragment
         android:id="@+id/nav_perfil"

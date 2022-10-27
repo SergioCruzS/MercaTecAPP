@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Sergio%20Cruz/AppData/Local/Android/Sdk/icons/material/materialicons/visibility_off/baseline_visibility_off_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Sergio%20Cruz/AppData/Local/Android/Sdk/icons/material/materialicons/camera_alt/baseline_camera_alt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="616161" />
-                            <entry key="opacityPercent" value="42" />
-                            <entry key="outputName" value="ic_visibility_off" />
+                            <entry key="outputName" value="ic_camera" />
                             <entry key="sourceFile" value="C:\Users\Sergio Cruz\AndroidStudioProjects\MercaTec" />
                           </map>
                         </option>
