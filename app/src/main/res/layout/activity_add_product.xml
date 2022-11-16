@@ -49,7 +49,7 @@
             android:layout_height="wrap_content">
 
             <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/imageSliderDetail"
+                android:id="@+id/imageSliderAddProduct"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:sliderAnimationDuration="600"
