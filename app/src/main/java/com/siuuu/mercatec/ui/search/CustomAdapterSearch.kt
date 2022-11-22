@@ -1,5 +1,6 @@
 package com.siuuu.mercatec.ui.search;
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class CustomAdapterSearch(items:ArrayList<Product>, var listener:ClickListener):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position)
-        holder.image?.setImageResource(item?.image!!)
+        holder.image?.setImageBitmap(BitmapFactory.decodeFile(item?.image?.get(0)?.getAbsolutePath()))
         holder.title?.text = item?.name
         holder.price?.text = "$ "+item?.price.toString() + " mxn"
     }

@@ -1,6 +1,7 @@
 package com.siuuu.mercatec.ui.ads
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class CustomAdapterAds(items:ArrayList<Product>, var listener: ClickListener): R
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position)
-        holder.image?.setImageResource(item?.image!!)
+        holder.image?.setImageBitmap(BitmapFactory.decodeFile(item?.image?.get(0)?.getAbsolutePath()))
         holder.name?.text = item?.name
         holder.price?.text = "$ "+item?.price.toString() + " mxn"
     }

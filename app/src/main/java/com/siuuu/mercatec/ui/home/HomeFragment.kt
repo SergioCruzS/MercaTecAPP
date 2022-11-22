@@ -2,6 +2,7 @@ package com.siuuu.mercatec.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
+import com.siuuu.mercatec.ui.ads.AdResponse
+import com.siuuu.mercatec.ui.ads.CustomAdapterAds
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
+import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
+import com.siuuu.mercatec.ui.values.Strings
+import org.json.JSONObject
+import java.io.File
 
 class HomeFragment : Fragment() {
 
@@ -27,25 +38,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val productos = ArrayList<Product>()
-        productos.add(Product("Sergio", "Arduino UNO", "Arduino UNO usado en perfectas condiciones",399.00,4.0,com.siuuu.mercatec.R.drawable.arduino_uno))
-        productos.add(Product("Kenia", "Resistencias", "Resistencias de 180 y 220 ohms nuevas",1.50,4.5,com.siuuu.mercatec.R.drawable.resistencia_180))
-        productos.add(Product("Susana", "Multímetro", "Marca truper, excelentes condiciones ",230.00,5.0,com.siuuu.mercatec.R.drawable.multimetro_truper))
-        productos.add(Product("Samuel", "Resistencias", "Resistencias de 220 ohms nuevas",2.00,4.5,com.siuuu.mercatec.R.drawable.resistencia_220))
-        productos.add(Product("Yadira", "Multímetro", "Marca SEAFON, excelentes condiciones ",100.00,3.7,com.siuuu.mercatec.R.drawable.multimetro_seafon))
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        listProducts = binding.rvProducts
-        listProducts?.setHasFixedSize(true)
-        layoutManager = LinearLayoutManager(this.context)
-        listProducts?.layoutManager = layoutManager
-        listProducts?.adapter = AdaptadorCustom(productos, object:ClickListener{
-            override fun onClick(vista: View, index: Int) {
-                Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
-                val intent = Intent(requireContext(), ProductDetailActivity::class.java)
-                requireContext()?.startActivity(intent)
-            }
-        })
+        val queue = Volley.newRequestQueue(requireContext())
+        val url = Strings.url_get_adsHome
+        val json = JsonObjectRequest(
+            Request.Method.GET, url,
+            JSONObject(),
+            Response.Listener { response ->
+                //println("resp: "+response.toString())
+                addListAds(response)
+                Toast.makeText(context, "Consulta correcta", Toast.LENGTH_SHORT).show()
+            },
+            Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
+
+        )
+        queue.add(json)
 
         return root
     }
@@ -53,6 +62,42 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun addListAds(response: JSONObject){
+        val productos = ArrayList<Product>()
+        var jsonOb = AdResponse.jsonAd(response.toString())
+        for (i in jsonOb?.ads?.indices!!){
+            var arrFilesImages = ArrayList<File>()
+            for (j in jsonOb?.ads?.get(i)?.img?.indices!!){
+                arrFilesImages.add(
+                    ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),context?.getExternalFilesDir(
+                        Environment.DIRECTORY_PICTURES)!!))
+            }
+            productos.add(Product(jsonOb?.ads?.get(i)?.uid.toString(),
+                jsonOb?.ads?.get(i)?.title.toString(),
+                jsonOb?.ads?.get(i)?.description.toString(),
+                jsonOb?.ads?.get(i)?.price!!.toDouble(),
+                0.0,
+                arrFilesImages))
+        }
+
+        listProducts = binding.rvProducts
+        listProducts?.setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(this.context)
+        listProducts?.layoutManager = layoutManager
+        listProducts?.adapter = AdaptadorCustom(productos, object: ClickListener {
+            override fun onClick(vista: View, index: Int) {
+                Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
+                var extras = Bundle()
+                extras.putSerializable("data",productos[index])
+                extras.putBoolean("contact",true)
+
+                val intent = Intent(requireContext(), ProductDetailActivity::class.java)
+                intent.putExtras(extras)
+                requireContext()?.startActivity(intent)
+            }
+        })
     }
 }
 

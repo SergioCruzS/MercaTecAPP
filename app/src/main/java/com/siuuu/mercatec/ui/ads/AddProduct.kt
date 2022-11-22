@@ -1,16 +1,11 @@
 package com.siuuu.mercatec.ui.ads
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.android.volley.Request
 import com.android.volley.Response
@@ -18,18 +13,14 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.MainActivity
 import com.siuuu.mercatec.databinding.ActivityAddProductBinding
-import com.siuuu.mercatec.ui.imageSlider.SliderAdapter
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapterAddProduct
-import com.siuuu.mercatec.ui.login.LoginJSON
 import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import org.json.JSONObject
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 class AddProduct : AppCompatActivity() {
     private lateinit var binding: ActivityAddProductBinding

@@ -1,6 +1,7 @@
 package com.siuuu.mercatec.ui.home
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class AdaptadorCustom(items:ArrayList<Product>, var listener: ClickListener): Re
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position)
-        holder.image?.setImageResource(item?.image!!)
+        holder.image?.setImageBitmap(BitmapFactory.decodeFile(item?.image?.get(0)?.getAbsolutePath()))
         holder.user?.text = item?.user
         holder.name?.text = item?.name
         holder.description?.text = item?.description
