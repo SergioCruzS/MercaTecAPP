@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.siuuu.mercatec.R;
+import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.io.File;
@@ -23,6 +23,7 @@ public class SliderAdapterAddProduct extends
 
     private Context context;
     private List<File> mSliderItems = new ArrayList<>();
+    private List<String> itemsEncode = new ArrayList<>();
 
     public SliderAdapterAddProduct(Context context) {
         this.context = context;
@@ -40,7 +41,12 @@ public class SliderAdapterAddProduct extends
 
     public void addItem(File sliderItem) {
         this.mSliderItems.add(sliderItem);
+        itemsEncode.add(ImageEncodeAndDecode.Companion.encode(sliderItem));
         notifyDataSetChanged();
+    }
+
+    public List<String> getItemsEnc(){
+        return this.itemsEncode;
     }
 
     @Override
@@ -54,11 +60,10 @@ public class SliderAdapterAddProduct extends
 
         File sliderItem = mSliderItems.get(position);
 
-        viewHolder.textViewDescription.setText("Descripción");
+        //iewHolder.textViewDescription.setText("Descripción");
         viewHolder.textViewDescription.setTextSize(16);
         viewHolder.textViewDescription.setTextColor(Color.BLACK);
         viewHolder.imageViewBackground.setImageBitmap(BitmapFactory.decodeFile(sliderItem.getAbsolutePath()));
-
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,25 +1,40 @@
 package com.siuuu.mercatec.ui.ads
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.siuuu.mercatec.MainActivity
 import com.siuuu.mercatec.databinding.ActivityAddProductBinding
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapter
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapterAddProduct
+import com.siuuu.mercatec.ui.login.LoginJSON
+import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
+import com.siuuu.mercatec.ui.values.Strings
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 
 class AddProduct : AppCompatActivity() {
     private lateinit var binding: ActivityAddProductBinding
     lateinit var archivoFoto: File
-    var nombreFoto: String = "photo.jpg"
+    var nombreFoto: String = "mercatec_img_"
     val REQ_CODE_CAM: Int = 1
     val REQ_CODE_GAL: Int = 2
     lateinit var sliderView: SliderView
@@ -42,7 +57,28 @@ class AddProduct : AppCompatActivity() {
         }
 
         binding.ivDoneToolbarAdd.setOnClickListener(){
-            Toast.makeText(this,"Agregar producto",Toast.LENGTH_SHORT).show()
+            val queue = Volley.newRequestQueue(this)
+            val url = Strings.url_post_ad
+            val json = JsonObjectRequest(
+                Request.Method.POST, url,
+                JSONObject(
+                    AdToJSON("111",
+                    binding.tvTitleDetail.text.toString(),
+                    binding.tvPriceAndAvailableDetail.text.toString(),
+                    binding.tvDescriptionDetail.text.toString(),
+                    adapter.itemsEnc).toJson()),
+                Response.Listener { response ->
+                    //println("resp: "+response.toString())
+                    Toast.makeText(this, "Envío correcto", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    this?.startActivity(intent)
+                    finish()
+                },
+                Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}
+
+            )
+            queue.add(json)
+            Toast.makeText(this,"Agregado con éxito",Toast.LENGTH_SHORT).show()
         }
 
         binding.btPhotoAddProduct.setOnClickListener(){
@@ -72,8 +108,8 @@ class AddProduct : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
             try {
-                //imgVwFoto.setImageBitmap(data?.extras?.get("data") as Bitmap)
-                adapter.addItem(archivoFoto)
+                var imageEncode = ImageEncodeAndDecode.encode(archivoFoto)
+                adapter.addItem(ImageEncodeAndDecode.decode(imageEncode,getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!))
                 Toast.makeText(applicationContext, "Foto capturada", Toast.LENGTH_SHORT).show()
             }catch (e: Exception){
                 Toast.makeText(applicationContext, "Error al capturar foto", Toast.LENGTH_SHORT).show()
