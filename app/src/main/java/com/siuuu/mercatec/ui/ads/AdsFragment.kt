@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -42,7 +43,7 @@ class AdsFragment : Fragment() {
         val queue = Volley.newRequestQueue(requireContext())
         val url = Strings.url_get_ad
         val json = object: JsonObjectRequest(
-            Request.Method.GET, url,
+            Method.GET, url,
             JSONObject(),
             Response.Listener { response ->
                 //println("resp: "+response.toString())
@@ -60,6 +61,11 @@ class AdsFragment : Fragment() {
             params["uid"] = "111"
             return params
         }}
+        json.retryPolicy = DefaultRetryPolicy(
+            0,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
         queue.add(json)
 
 

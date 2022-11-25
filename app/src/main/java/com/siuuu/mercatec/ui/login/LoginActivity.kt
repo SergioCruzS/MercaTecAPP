@@ -3,7 +3,7 @@ package com.siuuu.mercatec.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
+import android.preference.PreferenceManager
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.btIniciarSesionLogin.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
@@ -36,6 +37,10 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Login Correcto", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     this?.startActivity(intent)
+                    var jsonOb = UserResponseLogin.fromJson(response.toString())
+                    val editor = prefs.edit()
+                    editor.putString("uid",jsonOb?.uid)
+                    editor.apply()
                     finish()
                 },
                 Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}

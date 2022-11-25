@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -67,6 +68,11 @@ class AddProduct : AppCompatActivity() {
                 },
                 Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}
 
+            )
+            json.retryPolicy = DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
             )
             queue.add(json)
             Toast.makeText(this,"Agregado con éxito",Toast.LENGTH_SHORT).show()

@@ -10,18 +10,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
 import com.siuuu.mercatec.ui.ads.AdResponse
-import com.siuuu.mercatec.ui.ads.CustomAdapterAds
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
 import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import org.json.JSONObject
 import java.io.File
+
 
 class HomeFragment : Fragment() {
 
@@ -41,8 +42,8 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val queue = Volley.newRequestQueue(requireContext())
         val url = Strings.url_get_adsHome
+        val queue = Volley.newRequestQueue(context)
         val json = JsonObjectRequest(
             Request.Method.GET, url,
             JSONObject(),
@@ -54,7 +55,13 @@ class HomeFragment : Fragment() {
             Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
 
         )
+        json.retryPolicy = DefaultRetryPolicy(
+            0,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
         queue.add(json)
+
 
         return root
     }
@@ -64,7 +71,7 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun addListAds(response: JSONObject){
+    private fun addListAds(response: JSONObject){
         val productos = ArrayList<Product>()
         var jsonOb = AdResponse.jsonAd(response.toString())
         for (i in jsonOb?.ads?.indices!!){

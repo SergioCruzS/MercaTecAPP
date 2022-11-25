@@ -3,6 +3,7 @@ package com.siuuu.mercatec.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -22,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.btRegister.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
@@ -37,6 +39,10 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Registrado Correctamente",Toast.LENGTH_SHORT).show()
                     val intent = Intent(this,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     this?.startActivity(intent)
+                    var jsonOb = UserResponse.userFromJson(response.toString())
+                    val editor = prefs.edit()
+                    editor.putString("uid",jsonOb?.newUser?.uid)
+                    editor.apply()
                     finish()
                 },
                 Response.ErrorListener { error -> Toast.makeText(this,"$error",Toast.LENGTH_SHORT).show() }

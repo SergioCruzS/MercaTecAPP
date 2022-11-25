@@ -2,6 +2,7 @@ package com.siuuu.mercatec
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
@@ -12,9 +13,20 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.beust.klaxon.Klaxon
 import com.siuuu.mercatec.databinding.ActivityMainBinding
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
+import com.siuuu.mercatec.ui.login.Jwt
+import com.siuuu.mercatec.ui.login.LoginActivity
+import com.siuuu.mercatec.ui.login.LoginJSON
+import com.siuuu.mercatec.ui.login.UserResponse
 import com.siuuu.mercatec.ui.search.SearchActivity
+import com.siuuu.mercatec.ui.values.Strings
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         setSupportActionBar(binding.appBarMain.toolbarMain)
 
