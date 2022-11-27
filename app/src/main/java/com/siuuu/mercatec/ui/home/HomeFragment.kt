@@ -26,21 +26,19 @@ import java.io.File
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
     var listProducts:RecyclerView? = null
     var layoutManager:RecyclerView.LayoutManager? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    lateinit var binding:FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productos = ArrayList<Product>()
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val url = Strings.url_get_adsHome
         val queue = Volley.newRequestQueue(context)
@@ -64,11 +62,6 @@ class HomeFragment : Fragment() {
 
 
         return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun addListAds(response: JSONObject){

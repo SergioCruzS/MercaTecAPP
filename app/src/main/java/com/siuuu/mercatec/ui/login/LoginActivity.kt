@@ -23,7 +23,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if (!preference.preferenceManager(this).getString("uid","null").equals("null")){
+            val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            this?.startActivity(intent)
+        }
 
         binding.btIniciarSesionLogin.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
@@ -38,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     this?.startActivity(intent)
                     var jsonOb = UserResponseLogin.fromJson(response.toString())
-                    val editor = prefs.edit()
+                    val editor = preference.preferenceManager(this).edit()
                     editor.putString("uid",jsonOb?.uid)
                     editor.apply()
                     finish()

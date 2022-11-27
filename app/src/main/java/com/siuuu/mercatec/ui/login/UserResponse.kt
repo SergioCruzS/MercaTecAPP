@@ -1,5 +1,8 @@
 package com.siuuu.mercatec.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.beust.klaxon.*
 
 private val klaxon = Klaxon()
@@ -33,5 +36,16 @@ data class UserResponseLogin (
 
     companion object {
         public fun fromJson(json: String) = klaxon.parse<UserResponseLogin>(json)
+    }
+}
+
+data class preference(
+    val context: Context
+){
+    companion object{
+        fun preferenceManager(context: Context):SharedPreferences{
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs
+        }
     }
 }
