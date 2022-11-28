@@ -40,7 +40,8 @@
                 android:text="Perfil name"
                 android:textAlignment="center"
                 android:textSize="16dp"
-                android:textStyle="bold|normal" />
+                android:textStyle="bold|normal"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +49,9 @@
                 android:text="Product name"
                 android:textAlignment="textStart"
                 android:textSize="14dp"
-                android:textStyle="bold|normal" />
+                android:textStyle="normal"
+                android:textColor="@color/white"/>
+
         </LinearLayout>
 
 
@@ -64,12 +67,14 @@
             app:cardCornerRadius="6dp"
             android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF9900">
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSliderDetail"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:layout_margin="10dp"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
@@ -84,7 +89,6 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -92,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,16 +105,18 @@
                     android:id="@+id/tv_title_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="0dp"
                     android:maxLines="1"
-                    android:text="Título"/>
+                    android:textSize="30dp"
+                    android:text="Título"
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:id="@+id/tv_price_and_available_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_marginTop="15dp"
+                    android:padding="0dp"
+                    android:layout_marginTop="0dp"
                     android:maxLines="1"
                     android:text="Precio - Disponible" />
 
@@ -119,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_marginTop="15dp"
+                    android:textSize="20dp"
                     android:text="Descripción" />
 
                 <Button
@@ -128,12 +136,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
-                    android:text="Contactar al Vendedor"/>
+                    android:text="Contactar al Vendedor"
+                    android:background="#0033ff"/>
 
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
 
 </RelativeLayout>

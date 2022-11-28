@@ -9,6 +9,24 @@
     android:gravity="center"
     android:background="#641BE4">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MercaTec"
+        android:textStyle="bold"
+        android:textColor="#FF9900"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:background="#641be4"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:srcCompat="@drawable/arduino_uno"
+        android:layout_margin="20dp"
+        />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
