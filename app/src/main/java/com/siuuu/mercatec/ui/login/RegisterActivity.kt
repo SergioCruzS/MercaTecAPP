@@ -23,15 +23,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.btRegister.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
-            val url = Strings.url_post_register
+            val url = Strings.url_base + Strings.url_post_register
             val json = JsonObjectRequest(Request.Method.POST, url,
                 JSONObject(RegisterJSON(
                                         binding.tvNameRegister.text.toString(),
                                         binding.tvEmailRegister.text.toString(),
+                                        binding.tvPhoneRegister.text.toString(),
                                         binding.tvPasswordRegister.text.toString(),
                                         binding.tvConfirmPasswordRegister.text.toString()).toJson()),
                 Response.Listener { response ->
@@ -40,9 +40,9 @@ class RegisterActivity : AppCompatActivity() {
                     val intent = Intent(this,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     this?.startActivity(intent)
                     var jsonOb = UserResponse.userFromJson(response.toString())
-                    val editor = prefs.edit()
-                    editor.putString("uid",jsonOb?.newUser?.uid)
-                    editor.apply()
+                    preference.preferenceManager(this).edit().putString("uid",jsonOb?.newUser?.uid).commit()
+                    preference.preferenceManager(this).edit().putString("phone",jsonOb?.newUser?.phone).commit()
+                    preference.preferenceManager(this).edit().putString("name",jsonOb?.newUser?.name).commit()
                     finish()
                 },
                 Response.ErrorListener { error -> Toast.makeText(this,"$error",Toast.LENGTH_SHORT).show() }

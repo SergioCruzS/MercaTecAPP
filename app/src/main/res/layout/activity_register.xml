@@ -9,6 +9,13 @@
     android:background="#641BE4"
     android:gravity="center">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:src="@drawable/registro"
+        android:scaleType="centerCrop"
+        android:padding="20dp"/>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,6 +58,30 @@
             android:textAlignment="textStart"
             android:inputType="textEmailAddress"
             android:textSize="20sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="30dp">
+
+        <EditText
+            android:id="@+id/tv_phone_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
+            android:hint="Número de teléfono"
+            android:textAlignment="textStart"
+            android:inputType="phone"
+            android:textSize="20sp"
+            android:maxLength="10"/>
 
     </androidx.cardview.widget.CardView>
 

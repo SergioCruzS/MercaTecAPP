@@ -20,6 +20,8 @@ import com.siuuu.mercatec.databinding.FragmentAdsBinding
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
 import com.siuuu.mercatec.ui.home.ClickListener
 import com.siuuu.mercatec.ui.home.Product
+import com.siuuu.mercatec.ui.login.UserResponse
+import com.siuuu.mercatec.ui.login.preference
 import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import org.json.JSONObject
@@ -38,17 +40,18 @@ class AdsFragment : Fragment() {
     ): View {
         _binding = FragmentAdsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.ivLoadingAds.visibility = View.VISIBLE
 
 
         val queue = Volley.newRequestQueue(requireContext())
-        val url = Strings.url_get_ad
+        val url = Strings.url_base + Strings.url_get_ad
         val json = object: JsonObjectRequest(
             Method.GET, url,
             JSONObject(),
             Response.Listener { response ->
                 //println("resp: "+response.toString())
                 addListAds(response)
-                Toast.makeText(context, "Consulta correcta", Toast.LENGTH_SHORT).show()
+                binding.ivLoadingAds.visibility = View.GONE
             },
             Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
 
@@ -58,7 +61,7 @@ class AdsFragment : Fragment() {
         override fun getHeaders(): Map<String, String>? {
             val params: MutableMap<String, String> =
                 HashMap()
-            params["uid"] = "111"
+            params["uid"] = preference.preferenceManager(requireContext()).getString("uid","null")!!
             return params
         }}
         json.retryPolicy = DefaultRetryPolicy(
@@ -67,15 +70,6 @@ class AdsFragment : Fragment() {
             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
         queue.add(json)
-
-
-        //productos.add(Product("Sergio", "Arduino UNO", "Arduino UNO usado en perfectas condiciones",399.00,4.0,com.siuuu.mercatec.R.drawable.arduino_uno))
-        //productos.add(Product("Kenia", "Resistencias", "Resistencias de 180 y 220 ohms nuevas",1.50,4.5,com.siuuu.mercatec.R.drawable.resistencia_180))
-        //productos.add(Product("Susana", "Multímetro", "Marca truper, excelentes condiciones ",230.00,5.0,com.siuuu.mercatec.R.drawable.multimetro_truper))
-        //productos.add(Product("Samuel", "Resistencias", "Resistencias de 220 ohms nuevas",2.00,4.5,com.siuuu.mercatec.R.drawable.resistencia_220))
-        //productos.add(Product("Yadira", "Multímetro", "Marca SEAFON, excelentes condiciones ",100.00,3.7,com.siuuu.mercatec.R.drawable.multimetro_seafon))
-
-
 
         binding.btAddAds.setOnClickListener(){
             val intent = Intent(context,AddProduct::class.java)
@@ -97,8 +91,10 @@ class AdsFragment : Fragment() {
             for (j in jsonOb?.ads?.get(i)?.img?.indices!!){
                 arrFilesImages.add(ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!))
             }
-            productos.add(Product(jsonOb?.ads?.get(i)?.uid.toString(),
+            productos.add(Product(
+                jsonOb?.ads?.get(i)?.name.toString(),
                 jsonOb?.ads?.get(i)?.title.toString(),
+                jsonOb?.ads?.get(i)?.phone.toString(),
                 jsonOb?.ads?.get(i)?.description.toString(),
                 jsonOb?.ads?.get(i)?.price!!.toDouble(),
                 0.0,

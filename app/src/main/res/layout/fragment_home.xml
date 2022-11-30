@@ -14,6 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#4B808080"
-        android:scrollbarStyle="insideInset" />
+        android:scrollbarStyle="insideInset"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_loading_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loading"/>
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.MainActivity
 import com.siuuu.mercatec.databinding.ActivityAddProductBinding
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapterAddProduct
+import com.siuuu.mercatec.ui.login.preference
 import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
@@ -50,11 +51,14 @@ class AddProduct : AppCompatActivity() {
 
         binding.ivDoneToolbarAdd.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
-            val url = Strings.url_post_ad
+            val url = Strings.url_base + Strings.url_post_ad
             val json = JsonObjectRequest(
                 Request.Method.POST, url,
                 JSONObject(
-                    AdToJSON("111",
+                    AdToJSON(
+                        preference.preferenceManager(this).getString("uid","null").toString(),
+                        preference.preferenceManager(this).getString("name","nombre").toString(),
+                        preference.preferenceManager(this).getString("phone","9999999999").toString(),
                     binding.tvTitleDetail.text.toString(),
                     binding.tvPriceAndAvailableDetail.text.toString(),
                     binding.tvDescriptionDetail.text.toString(),
@@ -89,8 +93,6 @@ class AddProduct : AppCompatActivity() {
             }catch (e: Exception){
                 Toast.makeText(applicationContext, "Error al abrir la cámara", Toast.LENGTH_SHORT).show()
             }
-
-
         }
 
     }

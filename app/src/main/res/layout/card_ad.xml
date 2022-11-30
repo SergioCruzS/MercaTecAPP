@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="20dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -21,7 +22,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tv_title_ad"
@@ -33,21 +35,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Precio"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageButton
-                        android:id="@+id/bt_update_ad"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_update"/>
-                    <ImageButton
-                        android:id="@+id/bt_delete_ad"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_delete"/>
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

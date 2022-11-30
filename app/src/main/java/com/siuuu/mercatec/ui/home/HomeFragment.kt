@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.databinding.FragmentHomeBinding
 import com.siuuu.mercatec.ui.ads.AdResponse
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
+import com.siuuu.mercatec.ui.login.preference
 import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import org.json.JSONObject
@@ -39,8 +40,10 @@ class HomeFragment : Fragment() {
     ): View {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.ivLoadingHome.visibility = View.VISIBLE
+        binding.rvProducts.visibility = View.GONE
         val root: View = binding.root
-        val url = Strings.url_get_adsHome
+        val url = Strings.url_base + Strings.url_get_adsHome
         val queue = Volley.newRequestQueue(context)
         val json = JsonObjectRequest(
             Request.Method.GET, url,
@@ -48,7 +51,8 @@ class HomeFragment : Fragment() {
             Response.Listener { response ->
                 //println("resp: "+response.toString())
                 addListAds(response)
-                Toast.makeText(context, "Consulta correcta", Toast.LENGTH_SHORT).show()
+                binding.ivLoadingHome.visibility = View.GONE
+                binding.rvProducts.visibility = View.VISIBLE
             },
             Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
 
@@ -74,8 +78,10 @@ class HomeFragment : Fragment() {
                     ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),context?.getExternalFilesDir(
                         Environment.DIRECTORY_PICTURES)!!))
             }
-            productos.add(Product(jsonOb?.ads?.get(i)?.uid.toString(),
+            productos.add(Product(
+                jsonOb?.ads?.get(i)?.name.toString(),
                 jsonOb?.ads?.get(i)?.title.toString(),
+                jsonOb?.ads?.get(i)?.phone.toString(),
                 jsonOb?.ads?.get(i)?.description.toString(),
                 jsonOb?.ads?.get(i)?.price!!.toDouble(),
                 0.0,
@@ -88,7 +94,6 @@ class HomeFragment : Fragment() {
         listProducts?.layoutManager = layoutManager
         listProducts?.adapter = AdaptadorCustom(productos, object: ClickListener {
             override fun onClick(vista: View, index: Int) {
-                Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
                 var extras = Bundle()
                 extras.putSerializable("data",productos[index])
                 extras.putBoolean("contact",true)

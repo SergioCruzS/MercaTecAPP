@@ -23,7 +23,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_arrow_back"/>
         <ImageView
             android:id="@+id/iv_done_toolbar_add"
             android:layout_width="45dp"

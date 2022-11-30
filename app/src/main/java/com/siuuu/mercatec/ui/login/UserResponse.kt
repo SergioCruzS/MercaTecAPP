@@ -30,6 +30,8 @@ data class NewUser (
 data class UserResponseLogin (
     val ok: String,
     val uid: String,
+    val phone: String,
+    val name: String,
     val token: String
 ) {
     public fun toJson() = klaxon.toJsonString(this)

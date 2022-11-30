@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btIniciarSesionLogin.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
-            val url = Strings.url_post_login
+            val url = Strings.url_base+Strings.url_post_login
             val json = JsonObjectRequest(
                 Request.Method.POST, url,
                 JSONObject(LoginJSON(binding.tvEmailLogin.text.toString(),
@@ -44,7 +44,9 @@ class LoginActivity : AppCompatActivity() {
                     var jsonOb = UserResponseLogin.fromJson(response.toString())
                     val editor = preference.preferenceManager(this).edit()
                     editor.putString("uid",jsonOb?.uid)
-                    editor.apply()
+                    editor.putString("phone",jsonOb?.phone)
+                    editor.putString("name",jsonOb?.name)
+                    editor.commit()
                     finish()
                 },
                 Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}

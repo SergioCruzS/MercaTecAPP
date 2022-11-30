@@ -15,6 +15,7 @@ import com.siuuu.mercatec.ui.home.Product
 class CustomAdapterAds(items:ArrayList<Product>, var listener: ClickListener): RecyclerView.Adapter<CustomAdapterAds.ViewHolder>() {
 
     var items: ArrayList<Product>? = null
+
     init {
         this.items = items
     }

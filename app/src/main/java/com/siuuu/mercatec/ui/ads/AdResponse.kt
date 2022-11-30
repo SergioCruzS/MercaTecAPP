@@ -17,8 +17,21 @@ data class AdResponse (
 
 data class Ad (
     val uid: String,
+    val name: String,
+    val phone: String,
     val title: String,
     val price: String,
     val description: String,
     val img: List<String>
 )
+
+data class DeleteAd (
+    val uid: String,
+    val title: String
+) {
+    public fun toJson() = klaxon.toJsonString(this)
+
+    companion object {
+        public fun jsonAd(json: String) = klaxon.parse<DeleteAd>(json)
+    }
+}

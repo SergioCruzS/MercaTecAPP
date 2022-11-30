@@ -14,7 +14,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:padding="3dp"
+        android:padding="10dp"
         app:cardUseCompatPadding="false">
 
         <LinearLayout
@@ -32,7 +32,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Nombre Usuario"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"/>
 
                 <RatingBar
                     android:id="@+id/rb_rating"
@@ -57,28 +59,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Título"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:paddingStart="10dp"
+                android:gravity="center"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:orientation="horizontal">
-
+                android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/txv_descripcion"
-                    android:layout_width="265dp"
-                    android:layout_height="match_parent"
-                    android:text="El Arduino Uno es una placa de microcontrolador de código abierto basado en el microchip ATmega328P y desarrollado por Arduino..." />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Precio: "
+                    android:textSize="20sp"
+                    android:gravity="start"
+                    android:paddingStart="10dp"/>
 
                 <TextView
                     android:id="@+id/txv_precio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="$400"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
+                    android:text="400"
+                    android:textSize="20sp"
+                    android:paddingStart="95dp"/>
+            </RelativeLayout>
 
         </LinearLayout>
 

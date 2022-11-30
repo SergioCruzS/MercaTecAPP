@@ -33,7 +33,6 @@ class AdaptadorCustom(items:ArrayList<Product>, var listener: ClickListener): Re
         holder.image?.setImageBitmap(BitmapFactory.decodeFile(item?.image?.get(0)?.getAbsolutePath()))
         holder.user?.text = item?.user
         holder.name?.text = item?.name
-        holder.description?.text = item?.description
         holder.price?.text = "$ "+item?.price.toString() + " mxn"
         holder.rating?.rating = item?.rating?.toFloat()!!
     }
@@ -42,7 +41,6 @@ class AdaptadorCustom(items:ArrayList<Product>, var listener: ClickListener): Re
         var image:ImageView? = null
         var user:TextView? = null
         var name:TextView? = null
-        var description:TextView? = null
         var price:TextView? = null
         var rating:RatingBar? = null
         var listener:ClickListener? = null
@@ -51,7 +49,6 @@ class AdaptadorCustom(items:ArrayList<Product>, var listener: ClickListener): Re
             image = vista.findViewById(R.id.imv_producto)
             user = vista.findViewById(R.id.txv_usuario)
             name = vista.findViewById(R.id.txv_titulo)
-            description = vista.findViewById(R.id.txv_descripcion)
             price = vista.findViewById(R.id.txv_precio)
             rating = vista.findViewById(R.id.rb_rating)
             this.listener = listener

@@ -6,6 +6,8 @@ private val klaxon = Klaxon()
 
 data class AdToJSON (
     val uid: String,
+    val name: String,
+    val phone: String,
     val title: String,
     val price: String,
     val description: String,

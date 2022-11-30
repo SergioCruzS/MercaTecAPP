@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.beust.klaxon.Klaxon
 import com.siuuu.mercatec.databinding.ActivityMainBinding
+import com.siuuu.mercatec.databinding.NavHeaderMainBinding
 import com.siuuu.mercatec.ui.detalle.ProductDetailActivity
 import com.siuuu.mercatec.ui.login.Jwt
 import com.siuuu.mercatec.ui.login.LoginActivity
@@ -32,17 +33,20 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var binding2: NavHeaderMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding2 = NavHeaderMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         setSupportActionBar(binding.appBarMain.toolbarMain)
 
+        binding2.txvUsuarioBarra.setText("hola")
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
