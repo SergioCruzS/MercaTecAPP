@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                     preference.preferenceManager(this).edit().putString("name",jsonOb?.newUser?.name).commit()
                     finish()
                 },
-                Response.ErrorListener { error -> Toast.makeText(this,"$error",Toast.LENGTH_SHORT).show() }
+                Response.ErrorListener { error -> Toast.makeText(this,"Verifique los datos ingresados",Toast.LENGTH_LONG).show() }
 
             )
             queue.add(json)

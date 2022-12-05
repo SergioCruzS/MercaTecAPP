@@ -21,13 +21,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         if (!preference.preferenceManager(this).getString("uid","null").equals("null")){
             val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             this?.startActivity(intent)
+            finish()
         }
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.btIniciarSesionLogin.setOnClickListener(){
             val queue = Volley.newRequestQueue(this)
@@ -37,19 +38,16 @@ class LoginActivity : AppCompatActivity() {
                 JSONObject(LoginJSON(binding.tvEmailLogin.text.toString(),
                                      binding.tvPasswordLogin.text.toString()).toJson()),
                 Response.Listener { response ->
-                    //println("resp: "+response.toString())
-                    Toast.makeText(this, "Login Correcto", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Inicio de Sesión Correcto", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     this?.startActivity(intent)
                     var jsonOb = UserResponseLogin.fromJson(response.toString())
-                    val editor = preference.preferenceManager(this).edit()
-                    editor.putString("uid",jsonOb?.uid)
-                    editor.putString("phone",jsonOb?.phone)
-                    editor.putString("name",jsonOb?.name)
-                    editor.commit()
+                    preference.preferenceManager(this).edit().putString("uid",jsonOb?.uid.toString()).commit()
+                    preference.preferenceManager(this).edit().putString("phone",jsonOb?.phone.toString()).commit()
+                    preference.preferenceManager(this).edit().putString("name",jsonOb?.name.toString()).commit()
                     finish()
                 },
-                Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}
+                Response.ErrorListener { error -> Toast.makeText(this,"Verifique que sus datos sean correctos", Toast.LENGTH_LONG).show()}
 
             )
             queue.add(json)

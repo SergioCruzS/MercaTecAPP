@@ -19,6 +19,7 @@ import com.siuuu.mercatec.ui.chat.ChatActivity
 import com.siuuu.mercatec.ui.home.Product
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapter
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapterAddProduct
+import com.siuuu.mercatec.ui.imageSlider.SliderAdapterUrl
 import com.siuuu.mercatec.ui.login.UpdateJSON
 import com.siuuu.mercatec.ui.login.preference
 import com.siuuu.mercatec.ui.values.Strings
@@ -39,7 +40,7 @@ class ProductDetailActivity : AppCompatActivity() {
         //ImageSlider
 
         var sliderView:SliderView = this.binding.imageSliderDetail
-        var adapter = SliderAdapterAddProduct(this)
+        var adapter = SliderAdapterUrl(this)
         var bundle = intent.extras
         var listImages :Product = bundle?.getSerializable("data") as Product
 
@@ -54,7 +55,7 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.btEliminarAnuncio.visibility = View.VISIBLE
         }
         binding.tvTitleDetail.text = listImages.name
-        binding.tvPriceAndAvailableDetail.text = listImages.price.toString()
+        binding.tvPriceAndAvailableDetail.text = listImages.price.toString() +" mxn"
         binding.tvDescriptionDetail.text = listImages.description
         sliderView.setSliderAdapter(adapter)
         sliderView.scrollTimeInSec = 2

@@ -1,22 +1,26 @@
 package com.siuuu.mercatec.ui.ads
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import com.android.volley.DefaultRetryPolicy
+import androidx.core.net.toUri
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.tasks.Continuation
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.siuuu.mercatec.MainActivity
 import com.siuuu.mercatec.databinding.ActivityAddProductBinding
 import com.siuuu.mercatec.ui.imageSlider.SliderAdapterAddProduct
 import com.siuuu.mercatec.ui.login.preference
-import com.siuuu.mercatec.ui.values.ImageEncodeAndDecode
 import com.siuuu.mercatec.ui.values.Strings
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -29,14 +33,19 @@ class AddProduct : AppCompatActivity() {
     lateinit var archivoFoto: File
     var nombreFoto: String = "mercatec_img_"
     val REQ_CODE_CAM: Int = 1
-    val REQ_CODE_GAL: Int = 2
+    //val REQ_CODE_GAL: Int = 2
     lateinit var sliderView: SliderView
     lateinit var adapter: SliderAdapterAddProduct
+    lateinit var mStorage:StorageReference
+    //var listUrl:ArrayList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarAddProduct)
+
+        mStorage = FirebaseStorage.getInstance().getReference()
 
         sliderView = this.binding.imageSliderAddProduct
         adapter = SliderAdapterAddProduct(this)
@@ -50,6 +59,10 @@ class AddProduct : AppCompatActivity() {
         }
 
         binding.ivDoneToolbarAdd.setOnClickListener(){
+            if (adapter.urls.isEmpty()){
+                adapter.addUrls("https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg")
+            }
+
             val queue = Volley.newRequestQueue(this)
             val url = Strings.url_base + Strings.url_post_ad
             val json = JsonObjectRequest(
@@ -59,27 +72,20 @@ class AddProduct : AppCompatActivity() {
                         preference.preferenceManager(this).getString("uid","null").toString(),
                         preference.preferenceManager(this).getString("name","nombre").toString(),
                         preference.preferenceManager(this).getString("phone","9999999999").toString(),
-                    binding.tvTitleDetail.text.toString(),
-                    binding.tvPriceAndAvailableDetail.text.toString(),
-                    binding.tvDescriptionDetail.text.toString(),
-                    adapter.itemsEnc).toJson()),
+                        binding.tvTitleDetail.text.toString(),
+                        binding.tvPriceAndAvailableDetail.text.toString(),
+                        binding.tvDescriptionDetail.text.toString(),
+                        adapter.urls).toJson()),
                 Response.Listener { response ->
                     //println("resp: "+response.toString())
-                    Toast.makeText(this, "Envío correcto", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    this?.startActivity(intent)
+                    this.startActivity(intent)
                     finish()
                 },
-                Response.ErrorListener { error -> Toast.makeText(this,"$error", Toast.LENGTH_SHORT).show()}
+                Response.ErrorListener { error -> Toast.makeText(this,"Verifique que llenó todos los campos", Toast.LENGTH_SHORT).show()}
 
             )
-            json.retryPolicy = DefaultRetryPolicy(
-                0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-            )
             queue.add(json)
-            Toast.makeText(this,"Agregado con éxito",Toast.LENGTH_SHORT).show()
         }
 
         binding.btPhotoAddProduct.setOnClickListener(){
@@ -105,15 +111,38 @@ class AddProduct : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
             try {
-                var imageEncode = ImageEncodeAndDecode.encode(archivoFoto)
-                adapter.addItem(ImageEncodeAndDecode.decode(imageEncode,getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!))
-                Toast.makeText(applicationContext, "Foto capturada", Toast.LENGTH_SHORT).show()
+                //var imageEncode = ImageEncodeAndDecode.encode(archivoFoto)
+                var uri:Uri = archivoFoto.toUri()
+                var filePath = mStorage.child("fotos").child(uri.lastPathSegment!!)
+                var task = filePath.putFile(uri).addOnSuccessListener {
+                    Toast.makeText(applicationContext, "Foto capturada", Toast.LENGTH_SHORT).show()
+                }
+                var urlTask = task.continueWithTask(Continuation { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    filePath.downloadUrl
+                }).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val dowloadUri = task.result
+                        adapter.addUrls(dowloadUri.toString())
+                        println(dowloadUri.toString())
+                    }
+                }
+                adapter.addItem(archivoFoto)
             }catch (e: Exception){
                 Toast.makeText(applicationContext, "Error al capturar foto", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+
+    fun sendDb(listUrl:ArrayList<String>,context: Context){
+
     }
 
 

@@ -2,7 +2,7 @@ package com.siuuu.mercatec.ui.home
 
 import java.io.File
 
-class Product (user:String, name:String, phone:String,description:String, price: Double, rating: Double, image: ArrayList<File>) : java.io.Serializable{
+class Product (user:String, name:String, phone:String,description:String, price: Double, rating: Double, image: ArrayList<String>) : java.io.Serializable{
 
     var user = ""
     var name = ""
@@ -10,7 +10,7 @@ class Product (user:String, name:String, phone:String,description:String, price:
     var description = ""
     var price = 0.0
     var rating = 0.0
-    var image: ArrayList<File>? = null
+    var image: ArrayList<String>? = null
 
     init {
         this.user = user

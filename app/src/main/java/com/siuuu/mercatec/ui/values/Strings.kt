@@ -2,7 +2,7 @@ package com.siuuu.mercatec.ui.values
 
 class Strings {
     companion object {
-        val url_base = "https://mercatec-app-efchp.ondigitalocean.app"
+        val url_base = "https://hammerhead-app-e2kw9.ondigitalocean.app"
         val url_post_register = "/api/user/new"
         val url_post_login = "/api/user/login"
         val url_post_login_renew = "/api/user/login/renew"

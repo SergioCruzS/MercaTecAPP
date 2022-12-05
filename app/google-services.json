@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "494508179480",
+    "firebase_url": "https://mercatec-369cd-default-rtdb.firebaseio.com",
+    "project_id": "mercatec-369cd",
+    "storage_bucket": "mercatec-369cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494508179480:android:146e1bade93e9d8467036d",
+        "android_client_info": {
+          "package_name": "com.siuuu.mercatec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494508179480-slpoi0lnfkfdducf594njpphamm52oo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCMCjK2HJtMH6uwhNKGIG-u5U9t_0OoYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494508179480-slpoi0lnfkfdducf594njpphamm52oo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

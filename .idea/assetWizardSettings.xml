@@ -8,6 +8,17 @@
             <PersistentState>
               <option name="children">
                 <map>
+                  <entry key="confirmationStep">
+                    <value>
+                      <PersistentState>
+                        <option name="values">
+                          <map>
+                            <entry key="resourceDirectory" value="release" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
                   <entry key="imageAssetPanel">
                     <value>
                       <PersistentState>
@@ -317,7 +328,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Sergio%20Cruz/AppData/Local/Android/Sdk/icons/material/materialicons/camera_alt/baseline_camera_alt_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Sergio%20Cruz/AppData/Local/Android/Sdk/icons/material/materialicons/edit_off/baseline_edit_off_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -327,7 +338,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_camera" />
+                            <entry key="outputName" value="ic_edit_off" />
                             <entry key="sourceFile" value="C:\Users\Sergio Cruz\AndroidStudioProjects\MercaTec" />
                           </map>
                         </option>

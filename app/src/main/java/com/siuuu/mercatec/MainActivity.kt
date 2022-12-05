@@ -42,11 +42,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = NavHeaderMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         setSupportActionBar(binding.appBarMain.toolbarMain)
-
-        binding2.txvUsuarioBarra.setText("hola")
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -63,7 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         val ivbar:ImageView = findViewById(R.id.iv_ic_search)
         ivbar.setOnClickListener(){
-            Toast.makeText(this,"Buscar",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, SearchActivity::class.java)
             this.startActivity(intent)
         }

@@ -53,7 +53,7 @@ class AdsFragment : Fragment() {
                 addListAds(response)
                 binding.ivLoadingAds.visibility = View.GONE
             },
-            Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
+            Response.ErrorListener { error -> Toast.makeText(context,"Error al obtener los datos", Toast.LENGTH_SHORT).show()}
 
         ){
 
@@ -87,9 +87,9 @@ class AdsFragment : Fragment() {
         val productos = ArrayList<Product>()
         var jsonOb = AdResponse.jsonAd(response.toString())
         for (i in jsonOb?.ads?.indices!!){
-            var arrFilesImages = ArrayList<File>()
-            for (j in jsonOb?.ads?.get(i)?.img?.indices!!){
-                arrFilesImages.add(ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!))
+            var arrFilesImages = ArrayList<String>()
+            for (url in jsonOb?.ads?.get(i)?.img?.indices!!){
+                arrFilesImages.add(jsonOb?.ads?.get(i)?.img!!.get(url))
             }
             productos.add(Product(
                 jsonOb?.ads?.get(i)?.name.toString(),
@@ -105,9 +105,8 @@ class AdsFragment : Fragment() {
         listProducts?.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
         listProducts?.layoutManager = layoutManager
-        listProducts?.adapter = CustomAdapterAds(productos, object: ClickListener {
+        listProducts?.adapter = CustomAdapterAds(requireContext(),productos, object: ClickListener {
             override fun onClick(vista: View, index: Int) {
-                Toast.makeText(requireContext(), productos[index].name, Toast.LENGTH_SHORT).show()
                 var extras = Bundle()
                 extras.putSerializable("data",productos[index])
                 extras.putBoolean("contact",false)

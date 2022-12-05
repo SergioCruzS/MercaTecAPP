@@ -15,6 +15,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.siuuu.mercatec.MainActivity
+import com.siuuu.mercatec.R
 import com.siuuu.mercatec.databinding.FragmentPerfilBinding
 import com.siuuu.mercatec.ui.login.*
 import com.siuuu.mercatec.ui.values.Strings
@@ -53,7 +54,7 @@ class PerfilFragment : Fragment() {
                 binding.tvEmailPerfil.text.insert(0,user?.email)
                 binding.tvPhonePerfil.text.insert(0,user?.phone)
             },
-            Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
+            Response.ErrorListener { error -> Toast.makeText(context,"Error al obtener datos", Toast.LENGTH_SHORT).show()}
 
         ){
         @Throws(AuthFailureError::class)
@@ -77,12 +78,26 @@ class PerfilFragment : Fragment() {
             val intent = Intent(context, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             this?.startActivity(intent)
         }
+        var editPhone :Boolean = false
+        var editPassword:Boolean = false
 
         binding.ivEditPhone.setOnClickListener(){
+            if (editPhone){
+                binding.ivEditPhone.setImageResource(R.drawable.ic_edit)
+            }else{
+                binding.ivEditPhone.setImageResource(R.drawable.ic_edit_off)
+            }
+            editPhone = !editPhone
             binding.tvPhonePerfil.isEnabled = !binding.tvPhonePerfil.isEnabled
         }
 
         binding.ivEditPassword.setOnClickListener(){
+            if (editPassword){
+                binding.ivEditPassword.setImageResource(R.drawable.ic_edit)
+            }else{
+                binding.ivEditPassword.setImageResource(R.drawable.ic_edit_off)
+            }
+            editPassword = !editPassword
             binding.tvPasswordPerfil.isEnabled = !binding.tvPasswordPerfil.isEnabled
             binding.tvConfirmPasswordPerfil.isEnabled = !binding.tvConfirmPasswordPerfil.isEnabled
         }
@@ -112,6 +127,8 @@ class PerfilFragment : Fragment() {
                     Response.Listener { response ->
                         //println("resp: "+response.toString())
                         Toast.makeText(requireContext(), "Actualizado Correctamente",Toast.LENGTH_SHORT).show()
+                        binding.tvPasswordPerfil.text.clear()
+                        binding.tvConfirmPasswordPerfil.text.clear()
                         preference.preferenceManager(requireContext()).edit().putString("phone",binding.tvPhonePerfil.text.toString()).commit()
                     },
                     Response.ErrorListener { error -> Toast.makeText(requireContext(),"$error",Toast.LENGTH_SHORT).show() }

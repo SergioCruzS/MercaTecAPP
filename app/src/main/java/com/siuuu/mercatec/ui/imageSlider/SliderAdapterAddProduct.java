@@ -23,7 +23,7 @@ public class SliderAdapterAddProduct extends
 
     private Context context;
     private List<File> mSliderItems = new ArrayList<>();
-    private List<String> itemsEncode = new ArrayList<>();
+    private List<String> itemsUrl= new ArrayList<>();
 
     public SliderAdapterAddProduct(Context context) {
         this.context = context;
@@ -41,12 +41,19 @@ public class SliderAdapterAddProduct extends
 
     public void addItem(File sliderItem) {
         this.mSliderItems.add(sliderItem);
-        itemsEncode.add(ImageEncodeAndDecode.Companion.encode(sliderItem));
+        //itemsEncode.add(ImageEncodeAndDecode.Companion.encode(sliderItem));
         notifyDataSetChanged();
     }
 
-    public List<String> getItemsEnc(){
-        return this.itemsEncode;
+    public List<File> getImages(){
+        return this.mSliderItems;
+    }
+
+    public void addUrls(String url){
+        this.itemsUrl.add(url);
+    }
+    public List<String> getUrls(){
+        return this.itemsUrl;
     }
 
     @Override

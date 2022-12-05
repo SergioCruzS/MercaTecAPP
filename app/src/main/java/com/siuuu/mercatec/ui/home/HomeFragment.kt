@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                 binding.ivLoadingHome.visibility = View.GONE
                 binding.rvProducts.visibility = View.VISIBLE
             },
-            Response.ErrorListener { error -> Toast.makeText(context,"$error", Toast.LENGTH_SHORT).show()}
+            Response.ErrorListener { error -> Toast.makeText(context,"Error al obtener los datos", Toast.LENGTH_SHORT).show()}
 
         )
         json.retryPolicy = DefaultRetryPolicy(
@@ -72,11 +72,9 @@ class HomeFragment : Fragment() {
         val productos = ArrayList<Product>()
         var jsonOb = AdResponse.jsonAd(response.toString())
         for (i in jsonOb?.ads?.indices!!){
-            var arrFilesImages = ArrayList<File>()
-            for (j in jsonOb?.ads?.get(i)?.img?.indices!!){
-                arrFilesImages.add(
-                    ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),context?.getExternalFilesDir(
-                        Environment.DIRECTORY_PICTURES)!!))
+            var arrFilesImages = ArrayList<String>()
+            for (url in jsonOb?.ads?.get(i)?.img?.indices!!){
+                arrFilesImages.add(jsonOb?.ads?.get(i)?.img!!.get(url))
             }
             productos.add(Product(
                 jsonOb?.ads?.get(i)?.name.toString(),
@@ -92,7 +90,7 @@ class HomeFragment : Fragment() {
         listProducts?.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
         listProducts?.layoutManager = layoutManager
-        listProducts?.adapter = AdaptadorCustom(productos, object: ClickListener {
+        listProducts?.adapter = AdaptadorCustom(requireContext(),productos, object: ClickListener {
             override fun onClick(vista: View, index: Int) {
                 var extras = Bundle()
                 extras.putSerializable("data",productos[index])

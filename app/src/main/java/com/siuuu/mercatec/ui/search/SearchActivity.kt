@@ -62,7 +62,7 @@ class SearchActivity : AppCompatActivity(){
                     Response.Listener { response ->
                         //println("resp: "+response.toString())
                         addListAds(response)
-                        Toast.makeText(this@SearchActivity, "Consulta correcta", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SearchActivity, "Búsqueda exitosa", Toast.LENGTH_SHORT).show()
                     },
                     Response.ErrorListener { error -> Toast.makeText(this@SearchActivity,"$error", Toast.LENGTH_SHORT).show()}
 
@@ -101,11 +101,9 @@ class SearchActivity : AppCompatActivity(){
         val productos = ArrayList<Product>()
         var jsonOb = AdResponse.jsonAd(response.toString())
         for (i in jsonOb?.ads?.indices!!){
-            var arrFilesImages = ArrayList<File>()
-            for (j in jsonOb?.ads?.get(i)?.img?.indices!!){
-                arrFilesImages.add(
-                    ImageEncodeAndDecode.decode(jsonOb?.ads?.get(i)?.img!!.get(j),this.getExternalFilesDir(
-                        Environment.DIRECTORY_PICTURES)!!))
+            var arrFilesImages = ArrayList<String>()
+            for (url in jsonOb?.ads?.get(i)?.img?.indices!!){
+                arrFilesImages.add(jsonOb?.ads?.get(i)?.img!!.get(url))
             }
             productos.add(Product(
                 jsonOb?.ads?.get(i)?.name.toString(),
@@ -121,7 +119,7 @@ class SearchActivity : AppCompatActivity(){
         listProducts?.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this)
         listProducts?.layoutManager = layoutManager
-        listProducts?.adapter = CustomAdapterSearch(productos, object: ClickListener {
+        listProducts?.adapter = CustomAdapterSearch(this,productos, object: ClickListener {
             override fun onClick(vista: View, index: Int) {
                 Toast.makeText(this@SearchActivity, productos[index].name, Toast.LENGTH_SHORT).show()
                 var extras = Bundle()
